@@ -47,6 +47,18 @@ my $tests = [
 	],
 
 	[
+		'<foo><bar tmpl-each="bar"><id tmpl-bind="id"/></bar></foo>',
+		{
+			bar => [
+				{ id => 1 },
+				{ id => 2 },
+			]
+		},
+		'<foo><bar><id>1</id></bar><bar><id>2</id></bar></foo>',
+		'Each uses individual items as context'
+	],
+
+	[
 		'<foo tmpl-bind="foo.bar.baz"/>',
 		{ foo => { bar => { baz => 1 } } },
 		'<foo>1</foo>', 'Dot notation references nested hashes'
