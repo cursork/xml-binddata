@@ -125,7 +125,7 @@ XML::BindData - Bind data structures into XML
 
     my $data = {
         module => {
-            title => 'Developer',
+            title => 'XML::BindData',
             description => <<'EOF',
     Yet another way to generate XML for you.
     EOF
@@ -148,7 +148,7 @@ XML::BindData - Bind data structures into XML
     <request>
       <type>add</type>
       <obj>
-        <title>Developer</title>
+        <title>XML::BindData</title>
         <description>Yet another way to generate XML for you.
     </description>
         <multiple-elems>
