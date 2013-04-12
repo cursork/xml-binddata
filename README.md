@@ -41,7 +41,7 @@ into XML documents.
 ```perl
 my $data = {
     module => {
-        title => 'Developer',
+        title => 'XML::BindData',
         description => <<'EOF',
 Yet another way to generate XML for you.
 EOF
@@ -66,7 +66,7 @@ print XML::BindData->bind($source_xml, $data);
 <request>
   <type>add</type>
   <obj>
-    <title>Developer</title>
+    <title>XML::BindData</title>
     <description>Yet another way to generate XML for you.
 </description>
     <multiple-elems>
