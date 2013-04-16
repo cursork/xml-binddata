@@ -198,10 +198,10 @@ This has the following benefits:
 
 =item 2. The template is itself valid XML and can be edited as such.
 
-=item 3. The scope of intentionally limited to simple bindings (as opposed to
+=item 3. The scope is intentionally limited to simple bindings (as opposed to
 XSLT which can be arbitrarily complex).
 
-=item 4. It should be possible to use existing, complex, internal data
+=item 4. It is intended to be possible to use existing, complex, internal data
 structures for the binding.
 
 =back
