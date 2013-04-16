@@ -184,6 +184,8 @@ XML::BindData - Bind data structures into XML
 
 =head1 DESCRIPTION
 
+B<N.B.> This module should be considered ALPHA quality. Bugs are expected.
+
 This module provides yet another mechanism through which XML files can be
 created from Perl. It does this by reading in a valid XML template, and binding
 data directly into the DOM; creating/removing nodes as needs be.
