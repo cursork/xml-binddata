@@ -143,7 +143,7 @@ XML::BindData - Bind data structures into XML
 
     print XML::BindData->bind($source_xml, $data);
 
-=head2 Output (identation added for clarity)
+=head2 Output (indentation added for clarity)
 
     <request>
       <type>add</type>
