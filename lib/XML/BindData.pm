@@ -196,7 +196,16 @@ This has the following benefits:
 
 =item 2. The template is itself valid XML and can be edited as such.
 
+=item 3. The scope of intentionally limited to simple bindings (as opposed to
+XSLT which can be arbitrarily complex).
+
+=item 4. It should be possible to use existing, complex, internal data
+structures for the binding.
+
 =back
+
+The module is probably I<not> appropriate if you are already happily using
+XSLT, Template::Toolkit, etc. for XML generation.
 
 =head1 SUBROUTINES/METHODS
 
