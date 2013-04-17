@@ -1,26 +1,23 @@
 use strict;
 use warnings;
 
+use File::Spec;
+use FindBin;
 use Test::More;
 
 use_ok 'XML::BindData::Backwards';
 
-my $tests = [
-	[
-		'<foo tmpl-bind="foo"/>', '<foo>bar</foo>',
-		 { foo => 'bar' }, 'Single binding'
-	],
-
-	[
-		'<root><foo tmpl-bind="foo"/><bar tmpl-bind="bar"/><baz tmpl-bind="baz"/></root>',
-		'<root><foo>1</foo><bar>2</bar><baz>3</baz></root>',
-		{ foo => '1', bar => '2', baz => '3' }, 'Multiple bindings',
-	]
-];
+my $tests = require File::Spec->catfile($FindBin::Bin, 'tests.pl');
 
 foreach my $t (@$tests) {
-	my ($source_xml, $data, $output, $msg) = @$t;
-	is_deeply(XML::BindData::Backwards->unbind($source_xml, $data), $output, $msg);
+	my ($source_xml, $output, $data, $msg, $opts) = @$t;
+
+	local $TODO = $opts->{'reason'} // 'Not yet supported'
+		if ref $opts && $opts->{'skip'} eq 'backwards';
+
+	my $res = XML::BindData::Backwards->unbind($source_xml, $data);
+	is_deeply($res, $output, $msg);
 }
 
 done_testing;
+
