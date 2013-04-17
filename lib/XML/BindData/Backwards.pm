@@ -26,7 +26,7 @@ sub unbind {
 sub parse_node {
 	my ($node, $data_node, $context) = @_;
 
-	if (my $if_key = _get_attr($node, 'tmpl-if')) {
+	if (my $if_key = _get_attr($node, 'tmpl-if', 1)) {
 		# it can of course be undefined (it's removed from the tree)
 		my $bool   = (defined $data_node && $node->nodeName eq $data_node->nodeName)
 		             ? 1 : 0;
@@ -41,7 +41,9 @@ sub parse_node {
 		if ($node->nextSibling && $data_node) {
 			parse_node($node->nextSibling, $data_node, $context);
 		}
-		return;
+
+		# TODO - not completely correct
+		return if !$node || !$data_node;
 	}
 
 	if ($node->nodeName ne $data_node->nodeName) {
