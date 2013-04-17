@@ -83,6 +83,16 @@ my $tests = [
 		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => 1 },
 		'<foo></foo>', 'Unless false removes node'
 	],
+
+	[
+		'<foo><bar tmpl-if="show" tmpl-each="bar" tmpl-bind="this"/></foo>',
+		{
+ 			show => 1,
+			bar  => [ 1, 2, 3 ],
+		},
+		'<foo><bar>1</bar><bar>2</bar><bar>3</bar></foo>',
+		'If + each + this all on one tag works'
+	],
 ];
 
 foreach my $t (@$tests) {
