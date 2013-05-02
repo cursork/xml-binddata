@@ -61,6 +61,54 @@ sub parse_node {
 	parse_node($_, $context) foreach @children;
 }
 
+sub to_hash {
+	my ($class, $xml_string) = @_;
+
+	my $xml = XML::LibXML->load_xml(string => $xml_string);
+
+	my $enc = $xml->encoding;
+	return {
+		($enc ? (encoding => $enc) : ()),
+		root => _hashify_node($xml->documentElement),
+	};
+}
+
+sub _hashify_node {
+	my ($node) = @_;
+
+	my $hashed = {
+		prefix     => $node->prefix,
+		name       => $node->localname,
+		behaviours => _behaviours($node),
+		children   => [],
+		attributes => [],
+	};
+
+	# Got to be a better way to find only text immediately under this node
+	$hashed->{'text'} = $node->findvalue('./text()'), 
+	# Ignore extraneous (in our view only!) whitespace
+	$hashed->{'text'} =~ s/^\s*|\s*$//g;
+
+	foreach my $attr ($node->attributes) {
+		next unless $attr;
+
+		push @{$hashed->{attributes}}, {
+			name => $attr->nodeName,
+			value => $attr->value,
+		};
+	}
+
+	foreach my $child (_node_children($node)) {
+		next unless $child;
+		push @{$hashed->{children}}, _hashify_node($child);
+	}
+
+	return $hashed;
+}
+
+sub to_xml {
+}
+
 sub _get {
 	my ($context, $key) = @_;
 
@@ -81,6 +129,38 @@ sub _strip_attr {
 			return $attr->nodeValue;
 		}
 	}
+}
+
+sub _node_children {
+	my ($node) = @_;
+	return grep {
+		$_->nodeType eq XML_ELEMENT_NODE
+	} $node->childNodes;
+}
+
+sub _behaviours {
+	my ($node) = @_;
+
+	my $behaviours = {};
+
+	foreach my $simple_type (qw/ if each bind /) {
+		if (my $val = _strip_attr($node, "tmpl-$simple_type")) {
+			$behaviours->{$simple_type} = $val;
+		}
+	}
+
+	if (my $attr_map = _strip_attr($node, 'tmpl-attr-map')) {
+		my @attributes = map { [ split qr/:/ ] } split qr/,/, $attr_map;
+		my $map = {};
+		foreach (@attributes) {
+			$map->{$_->[0]} = $_->[1];
+		}
+		if (scalar keys %$map) {
+			$behaviours->{'attr-map'} = $map;
+		}
+	}
+
+	return $behaviours;
 }
 
 1;
