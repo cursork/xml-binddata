@@ -207,7 +207,7 @@ structures for the binding.
 =back
 
 The module is probably I<not> appropriate if you are already happily using
-XSLT, Template::Toolkit, etc. for XML generation.
+XSLT, Template Toolkit, etc. for XML generation.
 
 =head1 SUBROUTINES/METHODS
 
@@ -216,7 +216,7 @@ XSLT, Template::Toolkit, etc. for XML generation.
 =item XML::BindData->bind($xml_string, \%data)
 
 This forms the entire public API to the module. It will parse the XML and
-traverse the resulting tree, binding the information in data.
+traverse the resulting tree, binding the information in %data.
 
 =back
 
