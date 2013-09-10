@@ -76,12 +76,12 @@ my $tests = [
 
 	[
 		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => 0 },
-		'<foo><bar>bar</bar></foo>', 'Unless false keeps node'
+		'<foo><bar>bar</bar></foo>', 'If not false keeps node'
 	],
 
 	[
 		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => 1 },
-		'<foo></foo>', 'Unless false removes node'
+		'<foo></foo>', 'If not true removes node'
 	],
 
 	[
