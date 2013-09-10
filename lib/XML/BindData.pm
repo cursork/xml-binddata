@@ -64,6 +64,8 @@ sub parse_node {
 sub _get {
 	my ($context, $key) = @_;
 
+	return '' if !defined $key;
+
 	return $context if $key eq 'this';
 
 	my @parts = split qr/\./, $key;
