@@ -11,6 +11,7 @@ before_install:
 install:
    # Deal with all of the DZIL dependancies, quickly and quietly
    - cpanm --quiet --notest --skip-satisfied Dist::Zilla
+   - dzil authordeps | cpanm
    - dzil listdeps | cpanm
 
 script:
