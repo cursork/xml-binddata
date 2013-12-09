@@ -1,5 +1,7 @@
 # XML::BindData
 
+[![Build Status](https://travis-ci.org/cursork/xml-binddata.png?branch=master)](https://travis-ci.org/cursork/xml-binddata)
+
 Bind data structures into XML
 
     cpanm XML::BindData
