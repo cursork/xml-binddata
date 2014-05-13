@@ -261,4 +261,11 @@ attributes can be assigned at a time, separated by commas.
 
 =back
 
+=head1 CONTRIBUTORS
+
+=over
+
+=item Gareth Harper - GHARPER
+
+=back
 

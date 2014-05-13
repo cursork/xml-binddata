@@ -162,4 +162,7 @@ These directives may be assigned to nodes in the tree:
     Bind the value of 'opt1' into the attribute 'attr-name-one'. Multiple
     attributes can be assigned at a time, separated by commas.
 
+## CONTRIBUTORS
+
+- Gareth Harper - [GHARPER](https://metacpan.org/author/GHARPER)
 
