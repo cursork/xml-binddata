@@ -40,6 +40,7 @@ sub parse_node {
 			parse_node($new, $subcontext);
 			$parent->appendChild($new);
 		}
+        return;
 	}
 
 	if (my $binding = _strip_attr($node, 'tmpl-bind')) {
