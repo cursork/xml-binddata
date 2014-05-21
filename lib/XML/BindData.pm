@@ -11,7 +11,9 @@ sub bind {
 	my $xml = XML::LibXML->load_xml(string => $xml_string);
 	parse_node($xml->documentElement, $data);
 
-	return $xml->toStringC14N;
+	# "If $format is 0, than the document is dumped as it was originally
+	# parsed"
+	return $xml->toString(0);
 }
 
 sub parse_node {

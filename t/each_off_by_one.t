@@ -12,10 +12,10 @@ $mock->add('_get' => sub { $counter++; return []; });
 
 is(
 	XML::BindData->bind(
-		'<foo><bar tmpl-each="bar" tmpl-bind="this"/></foo>',
+		"<?xml version=\"1.0\"?><foo><bar tmpl-each=\"bar\" tmpl-bind=\"this\"/></foo>",
 		{ bar => [ ] }
 	),
-	'<foo></foo>'
+	"<?xml version=\"1.0\"?>\n<foo/>\n"
 );
 is($counter, 1, 'Terminated correctly after each');
 

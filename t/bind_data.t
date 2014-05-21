@@ -13,7 +13,7 @@ my $tests = [
 
 	[
 		'<foo><multi tmpl-each="foo"/></foo>', { foo => [(1) x 3] },
-		'<foo><multi></multi><multi></multi><multi></multi></foo>',
+		'<foo><multi/><multi/><multi/></foo>',
 		'Each over multiple entities'
 	],
 
@@ -26,12 +26,12 @@ my $tests = [
 
 	[
 		'<foo tmpl-attr-map="bar:baz"/>', { baz => 'quux' },
-		'<foo bar="quux"></foo>', 'Attribute binds'
+		'<foo bar="quux"/>', 'Attribute binds'
 	],
 
 	[
 		'<foo tmpl-attr-map="a:aaa,b:bbb"/>', { aaa => 1, bbb => 2 },
-		'<foo a="1" b="2"></foo>', 'Multiple attributes bind'
+		'<foo a="1" b="2"/>', 'Multiple attributes bind'
 	],
 
 	[
@@ -71,7 +71,7 @@ my $tests = [
 
 	[
 		'<foo><bar tmpl-if="show">bar</bar></foo>', { show => 0 },
-		'<foo></foo>', 'If false removes node'
+		'<foo/>', 'If false removes node'
 	],
 
 	[
@@ -81,7 +81,7 @@ my $tests = [
 
 	[
 		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => 1 },
-		'<foo></foo>', 'If not true removes node'
+		'<foo/>', 'If not true removes node'
 	],
 
 	[
@@ -97,7 +97,11 @@ my $tests = [
 
 foreach my $t (@$tests) {
 	my ($source_xml, $data, $output, $msg) = @$t;
-	is(XML::BindData->bind($source_xml, $data), $output, $msg);
+	is(
+		XML::BindData->bind($source_xml, $data),
+		"<?xml version=\"1.0\"?>\n$output\n",
+		$msg
+	);
 }
 
 done_testing;
