@@ -20,31 +20,33 @@ sub parse_node {
 	if (my $if_key = _strip_attr($node, 'tmpl-if')) {
 		my $unless = $if_key =~ s/^!//;
 		my $val    = _get($context, $if_key);
-		if (   (!$unless && !$val)
-			|| ( $unless &&  $val)) {
+		if ( (!$unless && ! defined $val)
+			|| ( $unless &&  defined $val)) {
 			$node->unbindNode;
 		}
 	}
 
 	if (my $each_key = _strip_attr($node, 'tmpl-each')) {
 		my $parent = $node->parentNode;
-		$node->unbindNode;
 
 		my $to_add = _get($context, $each_key);
 		if (!$to_add || ref $to_add ne 'ARRAY') {
 			$to_add = [];
 		}
 
-		foreach my $subcontext (@$to_add) {
+		foreach my $subcontext ( reverse @$to_add ) {
 			my $new = $node->cloneNode(1); # deep clone
 			parse_node($new, $subcontext);
-			$parent->appendChild($new);
+			$parent->insertAfter( $new, $node );
 		}
+		$node->unbindNode;
 		return;
 	}
 
 	if (my $binding = _strip_attr($node, 'tmpl-bind')) {
-		my $val = _get($context, $binding) || '';
+		my $val = _get($context, $binding);
+		$val = '' unless defined $val;
+
 		$node->appendTextNode($val);
 	}
 

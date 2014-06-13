@@ -70,12 +70,17 @@ my $tests = [
 	],
 
 	[
-		'<foo><bar tmpl-if="show">bar</bar></foo>', { show => 0 },
+		'<foo><bar tmpl-if="show">bar</bar></foo>', { show => undef },
+		'<foo></foo>', 'If false removes node'
+	],
+    
+    [
+		'<foo><bar tmpl-if="show">bar</bar></foo>', { },
 		'<foo></foo>', 'If false removes node'
 	],
 
 	[
-		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => 0 },
+		'<foo><bar tmpl-if="!show">bar</bar></foo>', { show => undef },
 		'<foo><bar>bar</bar></foo>', 'If not false keeps node'
 	],
 
@@ -93,6 +98,26 @@ my $tests = [
 		'<foo><bar>1</bar><bar>2</bar><bar>3</bar></foo>',
 		'If + each + this all on one tag works'
 	],
+
+    [
+        '<foo><bar tmpl-each="list" tmpl-bind="this"/><baz tmpl-if="num" tmpl-bind="num" /></foo>',
+        {
+            list => [ 1, 2 ],
+            num => 3,
+        },
+        '<foo><bar>1</bar><bar>2</bar><baz>3</baz></foo>',
+        'XML order retained when using varying types',
+    ],
+    [
+        '<foo><bar tmpl-each="list" tmpl-bind="this"/><baz tmpl-if="num" tmpl-bind="num" /></foo>',
+        {
+            list => [ 0, 1 ],
+            num => 0,
+        },
+        '<foo><bar>0</bar><bar>1</bar><baz>0</baz></foo>',
+        'Number 0 is a valid value and passes if conditionals',
+    ],
+
 ];
 
 foreach my $t (@$tests) {

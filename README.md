@@ -156,6 +156,7 @@ These directives may be assigned to nodes in the tree:
 - tmpl-if="bool"
 
     Only show the node if bool is true-ish. Can be negated as `tmpl-if="!bool"`.
+    A '0' value evaluates as true for the purpose of allowing 0 within XML
 
 - tmpl-attr-map="attr-name-one:opt1,attr-name-two:opt2"
 
