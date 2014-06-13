@@ -20,8 +20,8 @@ sub parse_node {
 	if (my $if_key = _strip_attr($node, 'tmpl-if')) {
 		my $unless = $if_key =~ s/^!//;
 		my $val    = _get($context, $if_key);
-		if (   (!$unless && !$val)
-			|| ( $unless &&  $val)) {
+		if (   (!$unless && ! defined $val)
+			|| ( $unless &&  defined $val)) {
 			$node->unbindNode;
 		}
 	}
@@ -44,7 +44,9 @@ sub parse_node {
 	}
 
 	if (my $binding = _strip_attr($node, 'tmpl-bind')) {
-		my $val = _get($context, $binding) || '';
+		my $val = _get($context, $binding);
+        $val = '' unless defined $val;
+
 		$node->appendTextNode($val);
 	}
 
