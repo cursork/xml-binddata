@@ -105,7 +105,7 @@ my $tests = [
             list => [ 1, 2 ],
             num => 3,
         },
-        '<foo><bar>1</bar><bar>2</bar><baz>3<baz/></foo>',
+        '<foo><bar>1</bar><bar>2</bar><baz>3</baz></foo>',
         'XML order retained when using varying types',
     ],
     [
@@ -114,7 +114,7 @@ my $tests = [
             list => [ 0, 1 ],
             num => 0,
         },
-        '<foo><bar>0</bar><bar>1</bar><baz>0<baz/></foo>',
+        '<foo><bar>0</bar><bar>1</bar><baz>0</baz></foo>',
         'Number 0 is a valid value and passes if conditionals',
     ],
 
