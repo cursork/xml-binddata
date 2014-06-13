@@ -167,3 +167,5 @@ These directives may be assigned to nodes in the tree:
 
 - Gareth Harper - [GHARPER](https://metacpan.org/author/GHARPER)
 
+- Chris Pereira
+

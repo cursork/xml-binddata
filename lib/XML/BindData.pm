@@ -269,5 +269,7 @@ attributes can be assigned at a time, separated by commas.
 
 =item Gareth Harper - GHARPER
 
+=item Chris Pereira
+
 =back
 
