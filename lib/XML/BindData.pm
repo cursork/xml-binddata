@@ -49,7 +49,6 @@ sub parse_node {
         my $default = _strip_attr($node, 'tmpl-default');
 
         unless (defined $val) {
-
             $val = defined $default ? $default : '';
         }
 
