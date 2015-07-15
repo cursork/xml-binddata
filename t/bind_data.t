@@ -12,6 +12,11 @@ my $tests = [
 	],
 
 	[
+		'<foo tmpl-bind="foo"/>', { foo => undef },
+		'<foo></foo>', 'Single binding, undefined - get empty string'
+	],
+
+	[
 		'<foo tmpl-bind="foo" tmpl-default="baz"/>', { foo => 'bar' },
 		'<foo>bar</foo>', 'Single binding, with default (unused)'
 	],
