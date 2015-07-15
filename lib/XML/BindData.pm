@@ -45,7 +45,13 @@ sub parse_node {
 
 	if (my $binding = _strip_attr($node, 'tmpl-bind')) {
 		my $val = _get($context, $binding);
-		$val = '' unless defined $val;
+
+        my $default = _strip_attr($node, 'tmpl-default');
+
+        unless (defined $val) {
+
+            $val = defined $default ? $default : '';
+        }
 
 		$node->appendTextNode($val);
 	}
