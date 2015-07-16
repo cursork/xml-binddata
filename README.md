@@ -16,7 +16,10 @@ Bind data structures into XML
     <type>add</type>
     <obj>
         <title tmpl-bind="module.title"/>
-        <description tmpl-bind="module.description"/>
+        <description tmpl-bind="module.description"
+                     tmpl-default="A Perl module"/>
+        <version tmpl-bind="module.version"
+                 tmpl-default="0.0.1"/>
         <no-show tmpl-if="foo"/>
         <multiple-elems>
             <item tmpl-each="items">
@@ -69,8 +72,8 @@ print XML::BindData->bind($source_xml, $data);
   <type>add</type>
   <obj>
     <title>XML::BindData</title>
-    <description>Yet another way to generate XML for you.
-</description>
+    <description>Yet another way to generate XML for you.</description>
+    <version>0.0.1</version>
     <multiple-elems>
       <item>
         <id>1</id>
@@ -137,6 +140,11 @@ These directives may be assigned to nodes in the tree:
     Adds text content to the node. If an option is dot.separated, this will split
     on the dot and descend into nested hashes.
 
+- tmpl-default="value"
+
+    To be used with `tmpl-bind`. Adds a default text content value to the node if
+    the value specified by `tmpl-bind` is undefined.
+
 - tmpl-each="option"
 
     For the array ref found at 'option', duplicate this node, setting the current
@@ -166,6 +174,5 @@ These directives may be assigned to nodes in the tree:
 ## CONTRIBUTORS
 
 - Gareth Harper - [GHARPER](https://metacpan.org/author/GHARPER)
-
 - Chris Pereira
-
+- Michael Jemmeson - [MJEMMESON](https://metacpan.org/author/GHARPER)
