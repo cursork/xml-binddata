@@ -45,7 +45,12 @@ sub parse_node {
 
 	if (my $binding = _strip_attr($node, 'tmpl-bind')) {
 		my $val = _get($context, $binding);
-		$val = '' unless defined $val;
+
+        my $default = _strip_attr($node, 'tmpl-default');
+
+        unless (defined $val) {
+            $val = defined $default ? $default : '';
+        }
 
 		$node->appendTextNode($val);
 	}
@@ -105,7 +110,10 @@ XML::BindData - Bind data structures into XML
         <type>add</type>
         <obj>
             <title tmpl-bind="module.title"/>
-            <description tmpl-bind="module.description"/>
+            <description tmpl-bind="module.description"
+                         tmpl-default="A Perl module"/>
+            <version tmpl-bind="module.version"
+                     tmpl-default="0.0.1"/>
             <no-show tmpl-if="foo"/>
             <multiple-elems>
                 <item tmpl-each="items">
@@ -154,8 +162,8 @@ XML::BindData - Bind data structures into XML
       <type>add</type>
       <obj>
         <title>XML::BindData</title>
-        <description>Yet another way to generate XML for you.
-    </description>
+        <description>Yet another way to generate XML for you.</description>
+        <version>0.0.1</version>
         <multiple-elems>
           <item>
             <id>1</id>
@@ -236,6 +244,11 @@ These directives may be assigned to nodes in the tree:
 Adds text content to the node. If an option is dot.separated, this will split
 on the dot and descend into nested hashes.
 
+=item tmpl-default="value"
+
+To be used with C<tmpl-bind>. Adds a default text content value to the node if
+the value specified by C<tmpl-bind> is undefined.
+
 =item tmpl-each="option"
 
 For the array ref found at 'option', duplicate this node, setting the current
@@ -270,6 +283,8 @@ attributes can be assigned at a time, separated by commas.
 =item Gareth Harper - GHARPER
 
 =item Chris Pereira
+
+=item Michael Jemmeson - MJEMMESON
 
 =back
 

@@ -12,6 +12,21 @@ my $tests = [
 	],
 
 	[
+		'<foo tmpl-bind="foo"/>', { foo => undef },
+		'<foo></foo>', 'Single binding, undefined - get empty string'
+	],
+
+	[
+		'<foo tmpl-bind="foo" tmpl-default="baz"/>', { foo => 'bar' },
+		'<foo>bar</foo>', 'Single binding, with default (unused)'
+	],
+
+	[
+		'<foo tmpl-bind="foo" tmpl-default="baz"/>', {},
+		'<foo>baz</foo>', 'Single binding, with default (used)'
+	],
+
+	[
 		'<foo><multi tmpl-each="foo"/></foo>', { foo => [(1) x 3] },
 		'<foo><multi></multi><multi></multi><multi></multi></foo>',
 		'Each over multiple entities'
