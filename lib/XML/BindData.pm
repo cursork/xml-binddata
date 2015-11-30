@@ -11,7 +11,7 @@ sub bind {
 	my $xml = XML::LibXML->load_xml(string => $xml_string);
 	parse_node($xml->documentElement, $data);
 
-	return $xml->toStringC14N;
+	return $xml->toStringC14N(1);
 }
 
 sub parse_node {

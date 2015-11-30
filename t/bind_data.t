@@ -132,7 +132,11 @@ my $tests = [
         '<foo><bar>0</bar><bar>1</bar><baz>0</baz></foo>',
         'Number 0 is a valid value and passes if conditionals',
     ],
-
+    [
+        '<foo><bar tmpl-bind="num" /><!-- preserve comment --></foo>',{ num => 4 },
+        '<foo><bar>4</bar><!-- preserve comment --></foo>',
+        'Preserve comments'
+    ]
 ];
 
 foreach my $t (@$tests) {
