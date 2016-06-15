@@ -50,6 +50,11 @@ my $tests = [
 	],
 
 	[
+		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:123"/>', { aaa => 1, bbb => 2 },
+		'<foo a="1" b="2" c="123"></foo>', 'Attribute defaults'
+	],
+
+	[
 		'<foo><bar tmpl-each="bar"><baz tmpl-each="this" tmpl-bind="this"/></bar></foo>',
 		{
 			bar => [
