@@ -69,7 +69,7 @@ sub parse_node {
 
             foreach (@attributes) {
                 $node->setAttribute( $_->[0], $_->[1] )
-                    unless $node->getAttribute( $_->[0] );
+                    unless defined $node->getAttribute( $_->[0] );
             }
         }
 
