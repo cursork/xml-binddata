@@ -1,3 +1,4 @@
 xml-binddata-*
 .DS_Store
 .build
+*.swp
