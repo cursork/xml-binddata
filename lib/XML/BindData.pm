@@ -284,6 +284,12 @@ Only show the node if bool is true-ish. Can be negated as C<tmpl-if="!bool">.
 Bind the value of 'opt1' into the attribute 'attr-name-one'. Multiple
 attributes can be assigned at a time, separated by commas.
 
+=item tmpl-attr-defaults="attr-name-one:default1,attr-name-two:default2"
+
+Bind the value of 'default1' into the attribute 'attr-name-one' if no other
+defined value is supplied. Multiple attributes can be assigned at a time,
+separated by commas.
+
 =back
 
 =head1 CONTRIBUTORS
