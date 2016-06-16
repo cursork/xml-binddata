@@ -63,6 +63,16 @@ sub parse_node {
 		}
 	}
 
+        if ( my $attr_defaults = _strip_attr( $node, 'tmpl-attr-defaults' ) ) {
+            my @attributes = map { [ split qr/:/ ] } split qr/,/,
+                $attr_defaults;
+
+            foreach (@attributes) {
+                $node->setAttribute( $_->[0], $_->[1] )
+                    unless defined $node->getAttribute( $_->[0] );
+            }
+        }
+
 	my @children = grep {
 		$_->nodeType eq XML_ELEMENT_NODE
 	} $node->childNodes;
