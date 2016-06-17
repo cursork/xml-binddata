@@ -288,7 +288,8 @@ Only show the node if bool is true-ish. Can be negated as C<tmpl-if="!bool">.
 =item tmpl-attr-map="attr-name-one:opt1,attr-name-two:opt2"
 
 Bind the value of 'opt1' into the attribute 'attr-name-one'. Multiple
-attributes can be assigned at a time, separated by commas.
+attributes can be assigned at a time, separated by commas. Comma and colon
+characters in a default value must be preceded with a single backslash.
 
 =back
 
