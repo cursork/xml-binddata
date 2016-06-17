@@ -64,7 +64,13 @@ sub parse_node {
 	}
 
         if ( my $attr_defaults = _strip_attr( $node, 'tmpl-attr-defaults' ) ) {
-            my @attributes = map { [ split qr/:/ ] } split qr/,/,
+            my @attributes
+                = map {
+                [   map { s/\\([:,])/$1/g; $_ } # remove backslash escaping
+                    split qr/(?<!\\):/          # split on non-backslashed colons
+                ]
+                }
+                split qr/(?<!\\),/,           # split on non-backslashed commas
                 $attr_defaults;
 
             foreach (@attributes) {
@@ -282,7 +288,8 @@ Only show the node if bool is true-ish. Can be negated as C<tmpl-if="!bool">.
 =item tmpl-attr-map="attr-name-one:opt1,attr-name-two:opt2"
 
 Bind the value of 'opt1' into the attribute 'attr-name-one'. Multiple
-attributes can be assigned at a time, separated by commas.
+attributes can be assigned at a time, separated by commas. Comma and colon
+characters in a default value must be preceded with a single backslash.
 
 =item tmpl-attr-defaults="attr-name-one:default1,attr-name-two:default2"
 

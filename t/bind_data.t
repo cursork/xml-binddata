@@ -60,6 +60,11 @@ my $tests = [
 	],
 
 	[
+		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:foo\,bar,d:foo\:bar"/>', { aaa => 0, bbb => 2 },
+		'<foo a="0" b="2" c="foo,bar" d="foo:bar"></foo>', 'Attribute defaults with commas and colons'
+	],
+
+	[
 		'<foo><bar tmpl-each="bar"><baz tmpl-each="this" tmpl-bind="this"/></bar></foo>',
 		{
 			bar => [
