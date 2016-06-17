@@ -64,7 +64,13 @@ sub parse_node {
 	}
 
         if ( my $attr_defaults = _strip_attr( $node, 'tmpl-attr-defaults' ) ) {
-            my @attributes = map { [ split qr/:/ ] } split qr/,/,
+            my @attributes
+                = map {
+                [   map { s/\\([:,])/$1/g; $_ } # remove backslash escaping
+                    split qr/(?<!\\):/          # split on non-backslashed colons
+                ]
+                }
+                split qr/(?<!\\),/,           # split on non-backslashed commas
                 $attr_defaults;
 
             foreach (@attributes) {
