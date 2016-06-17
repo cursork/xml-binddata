@@ -50,9 +50,9 @@ my $tests = [
 	],
 
 	[
-		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:123"/>', { aaa => 1, bbb => 2 },
-		'<foo a="1" b="2" c="123"></foo>', 'Attribute defaults'
-	],
+		'<foo tmpl-attr-map="a:aaa,b:bbb,d:ddd" tmpl-attr-defaults="a:zzz,c:123,d:456"/>', { aaa => 1, bbb => 2 },
+		'<foo a="1" b="2" c="123" d="456"></foo>', 'Attribute defaults'
+    ],
 
 	[
 		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:0"/>', { aaa => 0, bbb => 2 },

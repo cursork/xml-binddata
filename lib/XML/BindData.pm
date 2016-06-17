@@ -68,8 +68,9 @@ sub parse_node {
                 $attr_defaults;
 
             foreach (@attributes) {
+                my $value = $node->getAttribute( $_->[0] );
                 $node->setAttribute( $_->[0], $_->[1] )
-                    unless defined $node->getAttribute( $_->[0] );
+                    if ! defined $value || $value eq ''; 
             }
         }
 
