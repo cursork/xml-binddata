@@ -50,6 +50,11 @@ my $tests = [
 	],
 
 	[
+		'<foo tmpl-attr-map="a:aaa,b:bbb,c:ccc"/>', { aaa => 1, bbb => 2 },
+		'<foo a="1" b="2"></foo>', 'Multiple attributes bind with undefined values'
+	],
+
+	[
 		'<foo tmpl-attr-map="a:aaa,b:bbb,d:ddd" tmpl-attr-defaults="a:zzz,c:123,d:456"/>', { aaa => 1, bbb => 2 },
 		'<foo a="1" b="2" c="123" d="456"></foo>', 'Attribute defaults'
     ],
@@ -57,6 +62,11 @@ my $tests = [
 	[
 		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:0"/>', { aaa => 0, bbb => 2 },
 		'<foo a="0" b="2" c="0"></foo>', 'Attribute defaults with false values'
+	],
+
+	[
+		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:0"/>', { aaa => undef, bbb => 2 },
+		'<foo a="zzz" b="2" c="0"></foo>', 'Attribute defaults with undefined values'
 	],
 
 	[
