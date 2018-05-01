@@ -60,7 +60,7 @@ sub parse_node {
 
 		foreach (@attributes) {
 			my $value = _get( $context, $_->[1] );
- 			$node->setAttribute( $_->[0], $value ) if defined $value;
+			$node->setAttribute( $_->[0], $value ) if defined $value;
 		}
 	}
 

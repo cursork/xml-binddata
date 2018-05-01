@@ -65,7 +65,7 @@ my $tests = [
 	],
 
 	[
-		'<foo tmpl-attr-map="a:aaa,b:bbb" tmpl-attr-defaults="a:zzz,c:0"/>', { aaa => undef, bbb => 2 },
+		'<foo tmpl-attr-map="a:aaa,b:bbb,c:ccc,d:ddd" tmpl-attr-defaults="a:zzz,c:0"/>', { aaa => undef, bbb => 2 },
 		'<foo a="zzz" b="2" c="0"></foo>', 'Attribute defaults with undefined values'
 	],
 
