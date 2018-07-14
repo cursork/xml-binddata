@@ -59,7 +59,8 @@ sub parse_node {
 		my @attributes = map { [ split qr/:/ ] } split qr/,/, $attr_map;
 
 		foreach (@attributes) {
-			$node->setAttribute($_->[0], _get($context, $_->[1]));
+			my $value = _get( $context, $_->[1] );
+			$node->setAttribute( $_->[0], $value ) if defined $value;
 		}
 	}
 
