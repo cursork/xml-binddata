@@ -77,7 +77,7 @@ sub parse_node {
             foreach (@attributes) {
                 my $value = $node->getAttribute( $_->[0] );
                 $node->setAttribute( $_->[0], $_->[1] )
-                    if ! defined $value || $value eq ''; 
+                    if ! defined $value || $value eq '';
             }
         }
 

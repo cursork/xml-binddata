@@ -2,6 +2,7 @@ use strict;
 use warnings;
 
 use Test::More;
+use Test::Warnings;
 
 use_ok 'XML::BindData';
 
@@ -113,7 +114,7 @@ my $tests = [
 		'<foo><bar tmpl-if="show">bar</bar></foo>', { show => undef },
 		'<foo></foo>', 'If false removes node'
 	],
-    
+
     [
 		'<foo><bar tmpl-if="show">bar</bar></foo>', { },
 		'<foo></foo>', 'If false removes node'
